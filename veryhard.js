@@ -1,81 +1,65 @@
-function consPerson (name, job, age) {
-        this.name = name;
-        this.job = job;
-        this.age = age;
+function consPerson(name, job, age) {
+  this.name = name;
+  this.job = job;
+  this.age = age;
 }
 
-
-consPerson.exercise = function () {
-            console.log('Running is fun! - said no one ever.');
-        }
-
-
-        consPerson.fetchJob = function () {
-            console.log(`${this.name} is a ${this.job}`);
-        }
-
-
-function Programmer(name, job, age, languages) {
-  Person.call(name, job, age); // Inherit properties from Person
-  this.languages = languages || []; // Languages passed in
-  this.busy = true; // Default value for busy is true
-}
-
-
-function Programmer(name, job, age, languages) {
-  Person.call(name, job, age); // Inherit properties from Person
-  this.languages = languages || []; // Languages passed in
-  this.busy = true; // Default value for busy is true
-}
-
-
-// Set Programmer's prototype to inherit from Person's prototype
-Programmer.prototype = Object.create(consPerson.prototype);
-Programmer.prototype.constructor = Programmer;
-
-
-// Programmer's methods
-Programmer.prototype.completeTask = function() {
-  this.busy = false; // Task completed, not busy anymore
+consPerson.prototype.exercise = function () {
+  console.log("Running is fun! - said no one ever.");
 };
 
-
-Programmer.prototype.acceptNewTask = function() {
-  this.busy = true; // Accept new task, mark busy
+consPerson.prototype.fetchJob = function () {
+  console.log(`${this.name} is a ${this.job}`);
 };
 
+function consProgrammer(name, job, age, language) {
+  consPerson.call(this,name, job, age); 
+  this.language = language || [];
+  this.busy = true; 
+}
 
-Programmer.prototype.offerNewTask = function() {
-  if (this.busy) {
+consProgrammer.prototype = Object.create(consPerson.prototype);
+consProgrammer.prototype.constructor = consProgrammer;
+
+consProgrammer.prototype.completeTask = function () {
+  this.busy = false; 
+};
+
+consProgrammer.prototype.acceptNewTask = function () {
+  this.busy = true; 
+};
+
+consProgrammer.prototype.offerNewTask = function () {
+  if (this.busy === true) {
     console.log(`${this.name} can't accept any new tasks right now.`);
   } else {
     console.log(`${this.name} would love to take on a new responsibility.`);
   }
 };
 
-
-Programmer.prototype.learnLanguage = function(language) {
-  this.languages.push(language);
+consProgrammer.prototype.learnLanguage = function (language) {
+  this.language.push(language);
 };
 
-
-Programmer.prototype.listLanguages = function() {
-  return this.languages.join(", ");
+consProgrammer.prototype.listLanguage = function () {
+  return this.language.join(", ");
 };
 
+const person1 = new consPerson('Brad', 'Backend Engineer', 20);
+const c1 = new consProgrammer('Liana', 'DevOps', 35, ['HTML', 'C#', 'LUA']);
+const c2 = new consProgrammer('Edwin', 'Janitor', 55, ['HTML', 'SASS', 'Ruby']);
+const c3 = new consProgrammer('Manny', 'SysOps', 31, ['HTML', 'CSS', 'JS', 'R']);
 
-const techProgrammer1 = new consPerson('Brad', 'Backend Engineer', 20);
-const c1 = new Programmer('Liana', 'DevOps', 35, ['HTML', 'C#', 'LUA']);
-const c2 = new Programmer('Edwin', 'Janitor', 55, ['HTML', 'SASS', 'Ruby']);
-const c3 = new Programmer('Manny', 'SysOps', 31, ['HTML', 'CSS', 'JS', 'R']);
-
-
-// Test methods
-person1.exercise(); // Running is fun! - said no one ever.
-person1.fetchJob(); // Brad is a Backend Engineer
-
-
-// Programmer actions
-c1.offerNewTask(); // Liana can't accept any new tasks right now.
-c1.completeTask(); // Completing task, not busy anymore
-c1.offerNewTask(); // Liana would love to take on a new responsibility.
+// Testing
+c1.learnLanguage("CSS");
+c2.learnLanguage("C++");
+c3.learnLanguage("JAVA");
+console.log(c1.listLanguage());
+console.log(c2.listLanguage());
+console.log(c3.listLanguage());
+console.log(person1);
+console.log(c1);
+console.log(c2);
+console.log(c3);
+person1.exercise(); 
+person1.fetchJob();

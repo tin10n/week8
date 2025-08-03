@@ -1,4 +1,4 @@
-const Patient2 = Patient("John", "123-45-6789");
+const Patient2 = Patient('John', '123-45-6789');
 
 function Patient(name, ssn) {
   const PII = {
